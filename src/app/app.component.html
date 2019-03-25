@@ -1,0 +1,10 @@
+
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
+
+      <agm-marker *ngFor="let estacion of estaciones"
+       [latitude]="estacion.lat"
+       [longitude]="estacion.lng"
+       [iconUrl]="estacion.icono">
+      </agm-marker>
+    </agm-map>
+
