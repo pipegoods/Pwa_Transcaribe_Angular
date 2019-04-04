@@ -1,10 +1,70 @@
 
-    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
+    <agm-map #AgmMap [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" (mapReady)="mapIsReady()">
 
       <agm-marker *ngFor="let estacion of estaciones"
        [latitude]="estacion.lat"
        [longitude]="estacion.lng"
-       [iconUrl]="estacion.icono">
+       [iconUrl]="estacion.icono"
+       (markerClick)="mostrarInformacionMarcador(estacion)"
+       >
+       <!-- <agm-info-window >
+         <h6 class="center-align">{{estacion.nombre}}</h6>
+         <br>
+         <p *ngIf="estacion.troncales">
+           <span *ngFor="let e of estacion.troncales">
+              <div class="chip #ffb74d orange lighten-2">
+                  {{ e }}
+          </div>
+        </span>
+         </p>
+         <p *ngIf="estacion.alimentadores ">
+            <span *ngFor="let e of estacion.alimentadores">
+               <div class="chip #e65100 orange darken-4">
+                   {{ e }}
+              </div>
+         </span>
+          </p>
+          <p *ngIf="estacion.preTroncales ">
+              <span *ngFor="let e of estacion.preTroncales">
+                 <div class="chip #388e3c green darken-2">
+                     {{ e }}
+             </div>
+           </span>
+            </p>
+       </agm-info-window> -->
       </agm-marker>
+
     </agm-map>
 
+    <div id="vf" class="floatItem">
+      
+      <ng-container *ngIf="estacion1; else elseTemplate">
+          <h6 class="center-align">{{estacion1.nombre}}</h6>
+           <br>
+           <p *ngIf="estacion1.troncales">
+             <span *ngFor="let e of estacion1.troncales">
+                <div class="chip #ffb74d orange lighten-2">
+                    {{ e }}
+            </div>
+          </span>
+           </p>
+           <p *ngIf="estacion1.alimentadores ">
+              <span *ngFor="let e of estacion1.alimentadores">
+                 <div class="chip #e65100 orange darken-4">
+                     {{ e }}
+                </div>
+           </span>
+            </p>
+            <p *ngIf="estacion1.preTroncales ">
+                <span *ngFor="let e of estacion1.preTroncales">
+                   <div class="chip #388e3c green darken-2">
+                       {{ e }}
+               </div>
+             </span>
+              </p>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <h6>Selecciona una estacion</h6>
+      </ng-template>
+      
+    </div>
